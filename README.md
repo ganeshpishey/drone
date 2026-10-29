@@ -1,57 +1,106 @@
-# Drone-Swarm: MAPPO and PX4/Gazebo Search-and-Rescue Prototype
+# Drone-Swarm: Multi-Drone Disaster Response Simulation
 
-## Ubuntu PX4/Gazebo handoff
+A simulation prototype for exploring how a small drone team could search an
+earthquake and landslide scene, report incidents, and coordinate specialist
+responses. It uses **PX4 SITL**, **Gazebo Harmonic**, and **MAVSDK-Python** on
+Ubuntu. It does not use ROS or ROS 2.
 
-This section and the linked handoff document describe the current Ubuntu
-simulation work. The detailed **[14-day plan and status](docs/DRONE_SWARM_14_DAY_PLAN.md)**
-is the continuation guide for teammates. It records verified work, limitations,
-safe launch commands, and the remaining tasks.
+The project has three simulated roles:
 
-### Current status
+- **Scout:** flies with a downward-facing RGB camera and searches the scene.
+- **Medical-Support:** intended to respond to reported human victims.
+- **Fire-Response:** intended to respond to reported fires.
 
-- **Day 5 environment:** the selected default is
-  `worlds/earthquake_landslide_apron_world.sdf`, launched through
-  `integration/mavsdk_controller/launch_three_px4.sh`. It retains the terrain,
-  debris, river, buildings, three launch pads, victims, and fire/smoke cues.
-- **Three-vehicle startup:** Scout (`x500_mono_cam_down_0`), Ambulance
-  (`x500_1`), and Fire-Response (`x500_2`) have been observed spawning and
-  connecting to PX4 SITL/Gazebo Harmonic.
-- **Scout takeoff/hover/land:** the one-Scout MAVSDK check completed a 3 m
-  takeoff, hover, and normal landing. An 8 m hover produced telemetry and an
-  airborne camera frame of the disaster area.
-- **Scout camera:** Gazebo publishes the camera topic, PX4 streams H.264/RTP
-  on UDP 5600, and the host-Python GStreamer capture utility saved a detailed
-  1280×960 RGB scene frame. No ROS is used.
-- **Scene ground truth:** the five victim model names and SDF world poses are
-  listed in `worlds/earthquake_landslide_apron_ground_truth.json`. These are
-  simulation annotations, not detections.
-- **Not implemented yet:** person/fire detection, camera-to-world localization,
-  incident coordination, dispatch, and the mission dashboard.
-- **Known blocker:** the multi-drone MAVSDK waypoint demo lost its gRPC stream
-  when entering Offboard control. A prior PX4 log reported a 5-second Hold
-  failsafe after link loss. Do not rerun the full swarm waypoint demo until the
-  connection failure is diagnosed and a controlled single-vehicle waypoint is
-  confirmed.
+The target workflow is: Scout camera frames → person/fire detections → estimated
+scene locations → incident assignment → specialist drone mission → operator
+monitoring. At the current stage, the camera stream and scene are available, but
+automatic detection, localization, dispatch, and the operational dashboard are
+not implemented. The role descriptions are project goals, not claims of
+completed autonomous capability.
 
-### Start the existing simulation
+## Project status
 
-From the repository root:
+| Area | Status |
+| --- | --- |
+| Apron earthquake/landslide Gazebo world | Selected environment; used by the default launcher |
+| Three PX4 SITL vehicles | Have spawned and connected in prior runs |
+| Scout vertical takeoff, hover, and landing | 3 m check completed; user confirmed normal landing |
+| Scout camera | Gazebo image topic and H.264/RTP stream observed; airborne RGB frame captured |
+| Victim scene annotations | Five model poses are recorded as ground truth |
+| Person and fire/smoke detection | Not implemented |
+| Camera-based world localization | Not implemented or measured |
+| Incident coordinator and specialist dispatch | Not implemented |
+| Live operator dashboard | Not implemented; `src/relay/viewer.py` is a replay viewer |
+| Three-drone waypoint flight | Blocked: MAVSDK gRPC stream disconnected at Offboard control; diagnose before retrying |
+
+The full day-by-day progress and acceptance criteria are in the
+[14-day implementation plan](docs/DRONE_SWARM_14_DAY_PLAN.md). It distinguishes
+verified work from pending work and is the continuation guide for teammates.
+
+## System design
+
+```mermaid
+flowchart LR
+    C[Scout RGB camera] --> P[Planned: person and fire detection]
+    P --> L[Planned: scene location estimate]
+    L --> I[Planned: incident coordinator]
+    I --> M[Planned: Medical-Support assignment]
+    I --> F[Planned: Fire-Response assignment]
+    M --> PX[PX4 SITL and MAVSDK]
+    F --> PX
+    PX --> G[Gazebo Harmonic]
+    G --> C
+```
+
+Gazebo provides the simulated environment and vehicles. PX4 handles flight
+control; MAVSDK provides mission-level commands. The existing discrete MAPPO
+research code is preserved separately. It is a possible future high-level
+coordination component and does not replace PX4 flight control. See the
+[legacy RELAY/MAPPO guide](docs/RELAY_LEGACY_README.md) for its original setup.
+
+## Requirements
+
+- Ubuntu with PX4 Autopilot SITL and Gazebo Harmonic installed.
+- Python 3 and the `mavsdk-grpc` package in the project’s `.venv-mavsdk`
+  environment.
+- Host `/usr/bin/python3` with PyGObject/GStreamer bindings for the provided
+  one-frame camera capture helper.
+- The Scout camera stream uses UDP port 5600; close other receivers on that port
+  before capturing a frame.
+
+The PX4 checkout is external to this repository. The launcher defaults to
+`/tmp/PX4-Autopilot`; set `PX4_AUTOPILOT_DIR` if your PX4 checkout is elsewhere.
+
+Create the MAVSDK virtual environment once if it is not already present:
+
+```bash
+python3 -m venv .venv-mavsdk
+source .venv-mavsdk/bin/activate
+python -m pip install --upgrade pip
+python -m pip install 'mavsdk-grpc>=3.17,<4'
+```
+
+The camera capture helper uses the host Python GStreamer bindings, so it runs
+with `/usr/bin/python3`, not with `.venv-mavsdk`.
+
+## Start the simulation
+
+From the repository root, launch the three-vehicle SITL session:
 
 ```bash
 ./integration/mavsdk_controller/launch_three_px4.sh
 ```
 
-It defaults to the apron world and logs under
-`/tmp/drone-swarm-px4-multi-<uid>/`. The script starts all three vehicles; the
-two response drones should remain parked when running a Scout-only MAVSDK
-check. Do not run a second launcher alongside an existing PX4/Gazebo session.
-The launcher's `stop` command terminates PX4/Gazebo processes system-wide; use
-it only after checking that those processes belong to this project.
+The launcher defaults to `worlds/earthquake_landslide_apron_world.sdf` and
+writes logs under `/tmp/drone-swarm-px4-multi-<uid>/`. Do not start a second
+launcher while another PX4/Gazebo session is running. The launcher’s `stop`
+subcommand stops PX4 and Gazebo processes system-wide; check that they belong to
+this project before using it.
 
-### Safe Scout-only hover check
+### Verified Scout-only hover check
 
-The following check does not use Offboard waypoints. It commands only Scout to
-take off vertically, hold, and land:
+Use a second terminal after all vehicles have connected. This test moves Scout
+vertically only and does not use Offboard waypoints:
 
 ```bash
 source .venv-mavsdk/bin/activate
@@ -60,16 +109,14 @@ python integration/mavsdk_controller/scout_hover_check.py \
   --telemetry-log /tmp/scout-hover-check.jsonl
 ```
 
-For the camera view beyond the launch pad, the same script accepts
-`--altitude 8 --hover-seconds 30`. Capture the frame while it reports that it
-is holding at altitude; wait for the landing confirmation before another
-flight.
+A higher vertical hover can be requested with `--altitude 8 --hover-seconds 30`.
+Capture during the hold and wait for the script to confirm landing before
+starting another flight.
 
-### Capture one Scout camera frame
+### Capture a Scout camera frame
 
-Close any live `gst-launch-1.0` viewer first, then capture while the simulation
-and Scout camera stream are active. Use the host Python interpreter because
-PyGObject is not installed in `.venv-mavsdk`:
+While Scout is airborne and its camera stream is active, close any other viewer
+receiving UDP 5600, then run:
 
 ```bash
 /usr/bin/python3 integration/mavsdk_controller/capture_scout_frame.py \
@@ -77,491 +124,45 @@ PyGObject is not installed in `.venv-mavsdk`:
 xdg-open /tmp/scout_camera_frame.ppm
 ```
 
-The capture prints `Saved 1280x960 RGB camera frame...` on success. This is a
-single-frame capture utility; it is not a live detector or a victim-detection
-claim.
-
-### Immediate next work
-
-1. Day 7: run a pretrained person detector against a captured frame; draw and
-   save bounding boxes. Treat fire/smoke as a separate detection task.
-2. Day 8: calibrate the camera and estimate world locations; compare them with
-   the scene ground truth and measure error.
-3. Diagnose the MAVSDK gRPC/Offboard disconnect separately. Do not start with
-   the three-drone waypoint mission.
-4. Continue with the incident coordinator, dispatch, dashboard, integrated
-   scenarios, evaluation, and final documentation in the roadmap.
-
-## Existing MAPPO / RELAY project
-
-The sections below document the existing discrete MAPPO/RELAY research code,
-including its separate Windows PowerShell/CUDA workflow. Keep that environment,
-its checkpoints, scenarios, and experiment results intact while developing the
-PX4/Gazebo simulation. The MAPPO policy is a future high-level coordinator; PX4
-continues to handle low-level flight control.
-
-RELAY is a deterministic heterogeneous multi-agent reinforcement-learning
-environment for studying learned communication in cooperative search and rescue.
-A Scout, Ambulance agents, and Fireman agents explore a partially observed grid,
-communicate continuous learned messages, and resolve role-specific incidents.
-
-The repository includes the PettingZoo environment, frozen scenario splits,
-recurrent MAPPO training, CUDA support, checkpoint/resume, evaluation, structured
-logging, verifiable Parquet replays, a desktop replay viewer, and media export.
-
-> The detailed behavior and architecture reference is [AUDIT.md](AUDIT.md).
-
-## Important task semantics
-
-- Scout: sees farther (radius 4), moves up to 2 cells, cannot resolve incidents.
-- Ambulance: sees radius 2, moves 1 cell, resolves victims in place.
-- Fireman: sees radius 2, moves 1 cell, resolves fires in place.
-- There is no victim pickup or hospital/drop-off step. The central staging area is
-  not a rescue destination.
-- Agents may share cells; there are no collision dynamics.
-- Every agent receives the same team reward.
-- Messages are learned eight-float vectors. Communication range is global.
-
-## Requirements
-
-- Windows PowerShell
-- CPython 3.11.9 (installed and selected by `uv`)
-- `uv`
-- NVIDIA driver and CUDA-capable GPU for GPU training
-- Several GB of free disk space for dependencies and experiment logs
-
-The lockfile selects the official PyTorch CUDA 13.0 build on Windows. CUDA Toolkit
-13.3 is currently detected on the development machine.
-
-## First-time setup
-
-From the project root:
-
-```powershell
-Set-Location V:\Projects\Relay
-uv python install 3.11.9
-uv sync --all-extras
-& .\Activate-Relay.ps1
-python ci\run_release_checks.py --skip-manifests
-```
-
-The first sync downloads the large CUDA PyTorch package and can take time.
-
-## Every new PowerShell window
-
-Activate once:
-
-```powershell
-Set-Location V:\Projects\Relay
-& .\Activate-Relay.ps1
-```
-
-Then use `relay-train`, `relay-evaluate`, `relay-replay`, and `relay-scenarios`
-directly. You do not need to type `.venv\Scripts` before every command.
-
-To leave the environment:
-
-```powershell
-deactivate
-```
-
-## Verify CUDA
-
-```powershell
-python -c "import torch; print(torch.__version__); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'NO CUDA')"
-nvcc --version
-nvidia-smi
-```
-
-Expected on the configured machine:
-
-```text
-2.13.0+cu130
-True
-NVIDIA GeForce RTX 5070 Laptop GPU
-```
-
-When training starts, verify the banner contains:
-
-```text
-device=cuda (NVIDIA GeForce RTX 5070 Laptop GPU)
-```
-
-The PettingZoo/NumPy environment workers still run on CPU, so CPU usage is normal.
-The model, inference tensors, loss, backpropagation, and optimizer run on CUDA.
-
-## Quick smoke training
-
-This is a short functional test, not a scientific result:
-
-```powershell
-relay-train `
-  --config configs\experiments\smoke_train.yaml `
-  execution.device=cuda
-```
-
-Training prints completed/total steps, percentage, PPO update, throughput, ETA,
-reward, losses, episode statistics, and every saved checkpoint.
-
-## Inspect a config before running
-
-Configurations compose `configs/base.yaml`, a preset, and an experiment file.
-CLI overrides use typed `section.field=value` syntax.
-
-```powershell
-relay-train `
-  --config configs\experiments\v1_nocomm.yaml `
-  --dry-run `
-  execution.num_workers=4 `
-  execution.envs_per_worker=2 `
-  execution.device=cuda
-```
-
-The dry run prints the complete resolved YAML, override diff, and checksum without
-creating a run. Unknown keys and invalid values fail. Scientific comparison fields
-such as grid, team, and communication mode are locked.
-
-## Random NoComm versus AlwaysComm baseline
-
-Generate one paired random episode for each condition and open both viewers:
-
-```powershell
-relay-replay baseline --episodes 1 --no-export --view
-```
-
-Generate 100 numerical baseline episodes without media encoding:
-
-```powershell
-relay-replay baseline --episodes 100 --no-export
-```
-
-Generate one pair and export compact GIF previews:
-
-```powershell
-relay-replay baseline --episodes 1
-```
-
-`--no-export` means “save the runs and Parquet replays, but do not encode GIF/MP4
-media.” It does not disable logging. `--view` opens interactive replay windows.
-
-The paired baseline uses identical scenario seeds and random physical actions in
-both communication conditions and verifies that physical trajectory checksums
-match.
-
-## Start scientific training
-
-Recommended initial worker layout for the current laptop is four worker processes
-with two environments each. Run experiments sequentially unless GPU memory and
-throughput measurements justify parallel training.
-
-### V1 NoComm
-
-```powershell
-relay-train `
-  --config configs\experiments\v1_nocomm.yaml `
-  execution.num_workers=4 `
-  execution.envs_per_worker=2 `
-  execution.device=cuda
-```
-
-### V1 AlwaysComm
-
-```powershell
-relay-train `
-  --config configs\experiments\v1_always_comm.yaml `
-  execution.num_workers=4 `
-  execution.envs_per_worker=2 `
-  execution.device=cuda
-```
-
-The standard target is 2,000,000 environment timesteps. A full update collects
-`rollout_steps * total_vector_envs` timesteps, so the final count can slightly
-exceed the target.
-
-Other experiment configs:
-
-| File | Condition |
-|---|---|
-| `p1_always.yaml` | Always broadcast with communication cost |
-| `p1_when.yaml` | Learn whether to broadcast |
-| `p2_who_only.yaml` | Always send, but learn the recipient |
-| `p2_full.yaml` | Learn whether and to whom to send |
-| `p3_context.yaml` | Five-agent contextual communication |
-| `o1_latency.yaml` | WHEN+WHO with two extra latency steps |
-| `o1_loss.yaml` | WHEN+WHO with 10% packet loss |
-
-## Monitor training
-
-The terminal progress line is the immediate status. TensorBoard provides historical
-curves:
-
-```powershell
-tensorboard --logdir runs
-```
-
-Open the printed local URL in a browser. Useful series are under `train/`, including
-reward, policy/value loss, entropy, approximate KL, clip fraction, gradient norm,
-episode return, and episode length.
-
-Training currently does not perform periodic validation or select a “best” model.
-Evaluate interval checkpoints explicitly when needed.
-
-To watch GPU activity in another PowerShell window:
-
-```powershell
-nvidia-smi -l 1
-```
-
-## Run directories and checkpoints
-
-Every launch creates a unique directory:
-
-```text
-runs\YYYYMMDDTHHMMSSZ-<experiment>-<config-hash>\
-```
-
-If a collision occurs, a numeric suffix is added; runs are never silently
-overwritten. Important files:
-
-```text
-manifest.json
-resolved_config.yaml
-config_diff.json
-checkpoints\latest.pt
-checkpoints\step_XXXXXXXXX.pt
-metrics\tensorboard\
-events\
-replays\
-errors\failure.json
-```
-
-`manifest.json` says whether a run is `running`, `complete`, or `failed`. A process
-killed forcefully can leave the status as `running`; inspect its checkpoint folder
-before resuming.
-
-Detailed timestep event logs are large. The completed 2-million-step reference run
-in this workspace generated hundreds of megabytes.
-
-## Resume training
-
-Use the same experiment config and the same total number of vector environments as
-the original launch:
-
-```powershell
-relay-train `
-  --config configs\experiments\v1_nocomm.yaml `
-  --resume runs\<training-run-id>\checkpoints\latest.pt `
-  execution.num_workers=4 `
-  execution.envs_per_worker=2 `
-  execution.device=cuda
-```
-
-To extend a completed run, raise the total target:
-
-```powershell
-relay-train `
-  --config configs\experiments\v1_nocomm.yaml `
-  --resume runs\<training-run-id>\checkpoints\latest.pt `
-  training.total_timesteps=3000000 `
-  execution.num_workers=4 `
-  execution.envs_per_worker=2 `
-  execution.device=cuda
-```
-
-Resume restores the model, optimizer, recurrent state, environment states, episode
-cursors, and Python/NumPy/PyTorch/CUDA RNG states. It resumes the original run
-directory rather than making a new training run.
-
-## Evaluate a checkpoint
-
-Use the experiment config that trained the checkpoint:
-
-```powershell
-relay-evaluate `
-  --config configs\experiments\v1_nocomm.yaml `
-  --checkpoint runs\<training-run-id>\checkpoints\latest.pt `
-  execution.device=cuda `
-  evaluation.episodes=100
-```
-
-Evaluation defaults to deterministic policy actions and ordered seeds from the
-frozen test split. It creates a separate run and saves:
-
-- per-episode return, length, success, seed, and replay path;
-- aggregate success rate, mean return, and mean length;
-- one complete Parquet replay per episode;
-- structured evaluation events and provenance.
-
-Use `evaluation.start_index=N` to evaluate a different non-overlapping slice. The
-requested range must fit inside the 1,000-seed split.
-
-## Replay commands
-
-Set a path once for easier reuse:
-
-```powershell
-$replay = "runs\<evaluation-run-id>\replays\episode_000000.parquet"
-```
-
-Summarize metadata:
-
-```powershell
-relay-replay summary $replay
-```
-
-Deterministically rerun all stored actions and verify every state hash:
-
-```powershell
-relay-replay verify $replay
-```
-
-Open the desktop viewer:
-
-```powershell
-relay-replay view $replay
-```
-
-Export media:
-
-```powershell
-relay-replay export $replay --output output\episode.gif --fps 8 --stride 2
-relay-replay export $replay --output output\episode.mp4 --fps 8 --stride 2
-relay-replay export $replay --output output\episode.png --start 40
-```
-
-The viewer is replay-only: it reads stored snapshots and never steps or mutates the
-simulation. `relay-replay generate` is the operation that runs a checkpoint to make
-a new replay:
-
-```powershell
-relay-replay generate `
-  --config configs\experiments\v1_nocomm.yaml `
-  --checkpoint runs\<training-run-id>\checkpoints\latest.pt `
-  --episodes 1 `
-  execution.device=cuda
-```
-
-## Scenario manifests and calibration
-
-The committed manifests are frozen scientific artifacts. Do not regenerate them
-unless the environment/generator version is intentionally changed.
-
-Validate the pilot manifest:
-
-```powershell
-relay-scenarios validate configs\manifests\relay-grid-v1.json --workers 4
-```
-
-Validate the P3 manifest:
-
-```powershell
-relay-scenarios validate configs\manifests\relay-grid-v1-p3.json --workers 4
-```
-
-Create random and privileged-oracle calibration data:
-
-```powershell
-relay-scenarios calibrate `
-  configs\manifests\relay-grid-v1.json `
-  --split validation `
-  --episodes 100 `
-  --output output\calibration\relay-grid-v1.parquet
-```
-
-The oracle is a privileged feasibility upper bound. It is not used for training or
-reported as decentralized learned performance.
-
-## Direct environment API
-
-```python
-import numpy as np
-
-from relay import RelayParallelEnv
-
-env = RelayParallelEnv(preset="pilot_core", communication_mode="when_who")
-observations, infos = env.reset(seed=7)
-
-while env.agents:
-    actions = {
-        agent: {
-            "physical": 0,
-            "send": 0,
-            "recipient": 0,
-            "message": np.zeros(8, dtype=np.float32),
-        }
-        for agent in env.agents
-    }
-    observations, rewards, terminations, truncations, infos = env.step(actions)
-
-env.close()
-```
-
-The action and observation schemas, reward formula, communication timing, and
-network layers are documented in [AUDIT.md](AUDIT.md).
-
-## Testing
-
-Quick release gate:
-
-```powershell
-python ci\run_release_checks.py --skip-manifests
-```
-
-Full release gate, including all 20,000 frozen pilot/P3 scenarios:
-
-```powershell
-python ci\run_release_checks.py
-```
-
-Individual tools:
-
-```powershell
-python -m pytest -q
-python -m ruff check src tests ci
-python -m mypy src
-```
-
-## Generated files and Git
-
-Training runs, checkpoints, TensorBoard data, Parquet logs/replays, media exports,
-virtual environments, caches, and temporary files are ignored by `.gitignore`.
-Commit source, configs, frozen manifests, tests, and documentation. Do not force-add
-checkpoints or generated run data.
-
-## Troubleshooting
-
-### `No Python at C:\Users\...\uv\python...`
-
-Use the project helper, which repairs the venv runtime reference:
-
-```powershell
-& .\Activate-Relay.ps1
-```
-
-### Training banner says `device=cpu`
-
-The checked-in base config defaults to CPU for portability. Include:
-
-```text
-execution.device=cuda
-```
-
-Confirm the resolved YAML printed before training says `device: cuda`.
-
-### CPU usage is high during CUDA training
-
-Expected. Map generation, environment stepping, IPC, and event serialization run
-on CPU. Confirm the training banner says CUDA and use `nvidia-smi -l 1` to observe
-GPU allocations/activity.
-
-### A command appears idle
-
-Training may initially say `collecting first rollout...`; it reports after the
-first rollout/PPO update. Baseline and evaluation commands print episode/tick
-progress. GIF/MP4 export is CPU-side encoding and can take longer than simulation.
-
-### Disk usage grows quickly
-
-Training logs every transition to compressed Parquet in addition to TensorBoard
-and checkpoints. Archive or remove old generated run directories after preserving
-the results you need. They are Git-ignored by default.
+A successful capture prints the saved image dimensions. This helper captures a
+single frame; it does not detect or identify victims.
+
+## Current limitations and safe continuation
+
+- Do not retry `three_drone_takeoff_demo.py` yet. Its MAVSDK gRPC stream closed
+  during Offboard waypoint control, and PX4 reported a Hold failsafe after the
+  link loss. The cause has not been established. Diagnose it and validate a
+  short Scout-only waypoint before a multi-drone waypoint mission.
+- Camera frames are captured, but person/fire detection and camera-to-world
+  localization still need implementation and evaluation against the victim
+  ground-truth poses.
+- The fire/smoke assets have produced Gazebo missing particle texture warnings;
+  check and repair their resources before relying on those visuals.
+- Do not change PX4 parameters, drone models, propellers, or low-level flight
+  control to work around an unexplained issue.
+- Do not claim autonomous detection, medical diagnosis, real-world readiness,
+  or response capability without successful evidence.
+
+## Repository map
+
+| Path | Purpose |
+| --- | --- |
+| `worlds/earthquake_landslide_apron_world.sdf` | Selected disaster-response world |
+| `worlds/earthquake_landslide_apron_ground_truth.json` | Five victim model IDs and poses for evaluation |
+| `worlds/disaster_assets/` | Local world meshes, victim models, and fire/smoke assets |
+| `integration/mavsdk_controller/launch_three_px4.sh` | Starts the three PX4 SITL vehicles and Gazebo |
+| `integration/mavsdk_controller/scout_hover_check.py` | Scout vertical takeoff, hover, and land check |
+| `integration/mavsdk_controller/capture_scout_frame.py` | One-frame camera stream capture helper |
+| `integration/mavsdk_controller/drones.json` | Vehicle roles, ports, and demo waypoint offsets |
+| `src/relay/viewer.py` | Existing MAPPO replay viewer, not the live drone dashboard |
+| `docs/DRONE_SWARM_14_DAY_PLAN.md` | Day-by-day status, acceptance criteria, and remaining work |
+| `docs/RELAY_LEGACY_README.md` | Preserved setup guide for the discrete MAPPO/RELAY research code |
+
+**Configuration note:** the launcher uses spawn poses defined in its shell
+script. The `spawn_pose` fields in `drones.json` do not set Gazebo spawn poses.
+
+## Project boundaries
+
+This is a simulation prototype. It does not include real flights, hardware-in-the-loop
+testing, ROS, full SLAM, raw-image model training, or direct motor control from
+MAPPO. Keep existing MAPPO checkpoints and experiments intact.
