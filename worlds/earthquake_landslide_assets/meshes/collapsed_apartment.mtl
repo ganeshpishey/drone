@@ -1,0 +1,24 @@
+newmtl concrete
+Ka 0.48 0.46 0.41
+Kd 0.48 0.46 0.41
+Ks 0.08 0.08 0.08
+newmtl dark_concrete
+Ka 0.32 0.34 0.34
+Kd 0.32 0.34 0.34
+Ks 0.08 0.08 0.08
+newmtl steel
+Ka 0.16 0.19 0.2
+Kd 0.16 0.19 0.2
+Ks 0.08 0.08 0.08
+newmtl brick
+Ka 0.49 0.25 0.17
+Kd 0.49 0.25 0.17
+Ks 0.08 0.08 0.08
+newmtl plaster
+Ka 0.62 0.57 0.46
+Kd 0.62 0.57 0.46
+Ks 0.08 0.08 0.08
+newmtl roof
+Ka 0.34 0.19 0.14
+Kd 0.34 0.19 0.14
+Ks 0.08 0.08 0.08

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="smoke_only">
+    <static>true</static>
+    <link name="smoke">
+      <visual name="smoke_puff_1">
+        <pose>-0.0324 0.0081 0.972 0.04 0.02 0.1</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.2349 0.2187 0.2754</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>0.19 0.20 0.21 0.78</ambient>
+          <diffuse>0.24 0.25 0.26 0.78</diffuse>
+        </material>
+        <transparency>0.22</transparency>
+      </visual>
+      <visual name="smoke_puff_2">
+        <pose>0.0891 0.0243 1.4013 -0.02 0.03 -0.12</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.3159 0.2754 0.324</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>0.18 0.19 0.20 0.72</ambient>
+          <diffuse>0.23 0.24 0.25 0.72</diffuse>
+        </material>
+        <transparency>0.28</transparency>
+      </visual>
+      <visual name="smoke_puff_3">
+        <pose>-0.1053 0 1.8711 0.02 -0.02 0.14</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.3888 0.3402 0.3483</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>0.17 0.18 0.19 0.66</ambient>
+          <diffuse>0.22 0.23 0.24 0.66</diffuse>
+        </material>
+        <transparency>0.34</transparency>
+      </visual>
+      <visual name="smoke_puff_4">
+        <pose>0.0972 0.01215 2.3571 -0.02 0.03 -0.08</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.4455 0.3888 0.3726</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>0.16 0.17 0.18 0.60</ambient>
+          <diffuse>0.21 0.22 0.23 0.60</diffuse>
+        </material>
+        <transparency>0.40</transparency>
+      </visual>
+    </link>
+  </model>
+</sdf>

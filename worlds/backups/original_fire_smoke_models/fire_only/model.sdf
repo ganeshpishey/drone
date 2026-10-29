@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="fire_only">
+    <static>true</static>
+    <link name="flames">
+      <visual name="flame_outer_center">
+        <pose>0 0 0.3807 0 0 0</pose>
+        <geometry>
+          <cone>
+            <radius>0.3078</radius>
+            <length>0.7614</length>
+          </cone>
+        </geometry>
+        <material>
+          <ambient>0.95 0.16 0.015 1</ambient>
+          <diffuse>1.0 0.22 0.015 1</diffuse>
+          <emissive>0.95 0.12 0.005 1</emissive>
+        </material>
+      </visual>
+      <visual name="flame_outer_left">
+        <pose>-0.1701 0.0162 0.2916 0.06 0.12 -0.16</pose>
+        <geometry>
+          <cone>
+            <radius>0.1944</radius>
+            <length>0.5832</length>
+          </cone>
+        </geometry>
+        <material>
+          <ambient>0.95 0.20 0.01 1</ambient>
+          <diffuse>1.0 0.28 0.015 1</diffuse>
+          <emissive>0.95 0.16 0.005 1</emissive>
+        </material>
+      </visual>
+      <visual name="flame_outer_right">
+        <pose>0.1782 -0.01215 0.2673 -0.05 -0.14 0.18</pose>
+        <geometry>
+          <cone>
+            <radius>0.1863</radius>
+            <length>0.5346</length>
+          </cone>
+        </geometry>
+        <material>
+          <ambient>0.95 0.19 0.01 1</ambient>
+          <diffuse>1.0 0.25 0.01 1</diffuse>
+          <emissive>0.95 0.14 0.005 1</emissive>
+        </material>
+      </visual>
+      <visual name="flame_yellow_core">
+        <pose>0 0 0.2754 0 0 0</pose>
+        <geometry>
+          <cone>
+            <radius>0.1539</radius>
+            <length>0.5508</length>
+          </cone>
+        </geometry>
+        <material>
+          <ambient>1.0 0.68 0.025 1</ambient>
+          <diffuse>1.0 0.82 0.04 1</diffuse>
+          <emissive>1.0 0.55 0.01 1</emissive>
+        </material>
+      </visual>
+      <visual name="flame_hot_base">
+        <pose>0 0 0.1296 0 0 0</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.2025 0.1782 0.162</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>1.0 0.48 0.015 1</ambient>
+          <diffuse>1.0 0.62 0.02 1</diffuse>
+          <emissive>1.0 0.4 0.005 1</emissive>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,9 @@
+{
+  "world": "earthquake_seed_7.sdf",
+  "mode": "earthquake",
+  "seed": 7,
+  "terrain": "terrain_earthquake.png",
+  "texture": "terrain_albedo_earthquake.png",
+  "incident_markers": "deterministically jittered +/- 4 m",
+  "drones": "externally spawned at launch pads"
+}

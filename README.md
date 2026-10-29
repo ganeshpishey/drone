@@ -1,11 +1,104 @@
-# Three-Drone Urban Search-and-Rescue Swarm
+# Drone-Swarm: MAPPO and PX4/Gazebo Search-and-Rescue Prototype
 
-The standalone setup, training, evaluation, replay, and project-description
-guide is here: **[DRONE_SWARM_README.md](DRONE_SWARM_README.md)**.
+## Ubuntu PX4/Gazebo handoff
 
-> The legacy RELAY material below is retained only as historical technical
-> reference. Use the linked drone guide and the `d1`, `d2`, and `d3` drone
-> configurations for this project.
+This section and the linked handoff document describe the current Ubuntu
+simulation work. The detailed **[14-day plan and status](docs/DRONE_SWARM_14_DAY_PLAN.md)**
+is the continuation guide for teammates. It records verified work, limitations,
+safe launch commands, and the remaining tasks.
+
+### Current status
+
+- **Day 5 environment:** the selected default is
+  `worlds/earthquake_landslide_apron_world.sdf`, launched through
+  `integration/mavsdk_controller/launch_three_px4.sh`. It retains the terrain,
+  debris, river, buildings, three launch pads, victims, and fire/smoke cues.
+- **Three-vehicle startup:** Scout (`x500_mono_cam_down_0`), Ambulance
+  (`x500_1`), and Fire-Response (`x500_2`) have been observed spawning and
+  connecting to PX4 SITL/Gazebo Harmonic.
+- **Scout takeoff/hover/land:** the one-Scout MAVSDK check completed a 3 m
+  takeoff, hover, and normal landing. An 8 m hover produced telemetry and an
+  airborne camera frame of the disaster area.
+- **Scout camera:** Gazebo publishes the camera topic, PX4 streams H.264/RTP
+  on UDP 5600, and the host-Python GStreamer capture utility saved a detailed
+  1280×960 RGB scene frame. No ROS is used.
+- **Scene ground truth:** the five victim model names and SDF world poses are
+  listed in `worlds/earthquake_landslide_apron_ground_truth.json`. These are
+  simulation annotations, not detections.
+- **Not implemented yet:** person/fire detection, camera-to-world localization,
+  incident coordination, dispatch, and the mission dashboard.
+- **Known blocker:** the multi-drone MAVSDK waypoint demo lost its gRPC stream
+  when entering Offboard control. A prior PX4 log reported a 5-second Hold
+  failsafe after link loss. Do not rerun the full swarm waypoint demo until the
+  connection failure is diagnosed and a controlled single-vehicle waypoint is
+  confirmed.
+
+### Start the existing simulation
+
+From the repository root:
+
+```bash
+./integration/mavsdk_controller/launch_three_px4.sh
+```
+
+It defaults to the apron world and logs under
+`/tmp/drone-swarm-px4-multi-<uid>/`. The script starts all three vehicles; the
+two response drones should remain parked when running a Scout-only MAVSDK
+check. Do not run a second launcher alongside an existing PX4/Gazebo session.
+The launcher's `stop` command terminates PX4/Gazebo processes system-wide; use
+it only after checking that those processes belong to this project.
+
+### Safe Scout-only hover check
+
+The following check does not use Offboard waypoints. It commands only Scout to
+take off vertically, hold, and land:
+
+```bash
+source .venv-mavsdk/bin/activate
+python integration/mavsdk_controller/scout_hover_check.py \
+  --altitude 3 --hover-seconds 10 \
+  --telemetry-log /tmp/scout-hover-check.jsonl
+```
+
+For the camera view beyond the launch pad, the same script accepts
+`--altitude 8 --hover-seconds 30`. Capture the frame while it reports that it
+is holding at altitude; wait for the landing confirmation before another
+flight.
+
+### Capture one Scout camera frame
+
+Close any live `gst-launch-1.0` viewer first, then capture while the simulation
+and Scout camera stream are active. Use the host Python interpreter because
+PyGObject is not installed in `.venv-mavsdk`:
+
+```bash
+/usr/bin/python3 integration/mavsdk_controller/capture_scout_frame.py \
+  --output /tmp/scout_camera_frame.ppm
+xdg-open /tmp/scout_camera_frame.ppm
+```
+
+The capture prints `Saved 1280x960 RGB camera frame...` on success. This is a
+single-frame capture utility; it is not a live detector or a victim-detection
+claim.
+
+### Immediate next work
+
+1. Day 7: run a pretrained person detector against a captured frame; draw and
+   save bounding boxes. Treat fire/smoke as a separate detection task.
+2. Day 8: calibrate the camera and estimate world locations; compare them with
+   the scene ground truth and measure error.
+3. Diagnose the MAVSDK gRPC/Offboard disconnect separately. Do not start with
+   the three-drone waypoint mission.
+4. Continue with the incident coordinator, dispatch, dashboard, integrated
+   scenarios, evaluation, and final documentation in the roadmap.
+
+## Existing MAPPO / RELAY project
+
+The sections below document the existing discrete MAPPO/RELAY research code,
+including its separate Windows PowerShell/CUDA workflow. Keep that environment,
+its checkpoints, scenarios, and experiment results intact while developing the
+PX4/Gazebo simulation. The MAPPO policy is a future high-level coordinator; PX4
+continues to handle low-level flight control.
 
 RELAY is a deterministic heterogeneous multi-agent reinforcement-learning
 environment for studying learned communication in cooperative search and rescue.

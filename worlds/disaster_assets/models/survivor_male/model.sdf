@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="survivor_male">
+    <static>true</static>
+    <link name="link">
+      <!-- Scale the source model's -0.837 m rest offset with its 1/3 size. -->
+      <pose>0 0 -0.279 0 0 0</pose>
+      <collision name="collision"><geometry><mesh><uri>meshes/survivor_male.dae</uri><scale>0.333333 0.333333 0.333333</scale></mesh></geometry></collision>
+      <visual name="visual"><geometry><mesh><uri>meshes/survivor_male.dae</uri><scale>0.333333 0.333333 0.333333</scale></mesh></geometry></visual>
+    </link>
+  </model>
+</sdf>

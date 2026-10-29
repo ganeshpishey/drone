@@ -1,0 +1,11 @@
+{
+  "scout_0": {
+    "role": "Scout hover check",
+    "instance": 0,
+    "system_id": 1,
+    "mavsdk_port": 14540,
+    "mavsdk_server_port": 50051,
+    "spawn_pose": "0,0,0,0,0,0",
+    "waypoint_ned_m": [0.0, 0.0, 3.0]
+  }
+}

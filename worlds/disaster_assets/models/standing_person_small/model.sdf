@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="standing_person_small">
+    <static>true</static>
+    <link name="link">
+      <collision name="bottom">
+        <pose>0 -0.02 0.002 0 0 0</pose>
+        <geometry><box><size>0.1 0.07 0.004</size></box></geometry>
+      </collision>
+      <collision name="person">
+        <pose>0 0 0.004 0.04 0 0</pose>
+        <geometry><mesh><uri>meshes/standing.dae</uri><scale>0.2 0.2 0.2</scale></mesh></geometry>
+      </collision>
+      <visual name="visual">
+        <pose>0 0 0.004 0.04 0 0</pose>
+        <geometry><mesh><uri>meshes/standing.dae</uri><scale>0.2 0.2 0.2</scale></mesh></geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

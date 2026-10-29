@@ -1,0 +1,33 @@
+{
+  "world": "earthquake_landslide_apron_world",
+  "source": "earthquake_landslide_apron_world.sdf include poses",
+  "coordinate_frame": "Gazebo world frame; x and y in metres; yaw in radians",
+  "purpose": "Scene ground truth for perception and localization evaluation; these are not camera detections.",
+  "victims": [
+    {
+      "id": "incident_victim_1",
+      "model": "survivor_female",
+      "pose_xyz_yaw": [-72.6, -54.3, 1.659423, 0.3]
+    },
+    {
+      "id": "incident_victim_2",
+      "model": "survivor_male",
+      "pose_xyz_yaw": [-70.3, -54.2, 2.129575, 2.1]
+    },
+    {
+      "id": "incident_victim_3",
+      "model": "survivor_female",
+      "pose_xyz_yaw": [-68.3, -54.5, 2.497331, -0.7]
+    },
+    {
+      "id": "incident_victim_5",
+      "model": "standing_person_small",
+      "pose_xyz_yaw": [-74.5, -52.5, 1.682516, 0.0]
+    },
+    {
+      "id": "incident_victim_6",
+      "model": "rescue_randy_sitting_small",
+      "pose_xyz_yaw": [-68.0, -52.0, 2.155283, 1.2]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="fire_smoke">
+    <static>true</static>
+    <link name="visuals">
+      <visual name="flame_outer_center">
+        <pose>0 0 0.423 0 0 0</pose>
+        <geometry>
+          <cone>
+            <radius>0.342</radius>
+            <length>0.846</length>
+          </cone>
+        </geometry>
+        <material>
+          <ambient>0.95 0.16 0.015 1</ambient>
+          <diffuse>1.0 0.22 0.015 1</diffuse>
+          <emissive>0.95 0.12 0.005 1</emissive>
+        </material>
+      </visual>
+      <visual name="flame_outer_left">
+        <pose>-0.189 0.018 0.324 0.06 0.12 -0.16</pose>
+        <geometry>
+          <cone>
+            <radius>0.216</radius>
+            <length>0.648</length>
+          </cone>
+        </geometry>
+        <material>
+          <ambient>0.95 0.20 0.01 1</ambient>
+          <diffuse>1.0 0.28 0.015 1</diffuse>
+          <emissive>0.95 0.16 0.005 1</emissive>
+        </material>
+      </visual>
+      <visual name="flame_outer_right">
+        <pose>0.198 -0.0135 0.297 -0.05 -0.14 0.18</pose>
+        <geometry>
+          <cone>
+            <radius>0.207</radius>
+            <length>0.594</length>
+          </cone>
+        </geometry>
+        <material>
+          <ambient>0.95 0.19 0.01 1</ambient>
+          <diffuse>1.0 0.25 0.01 1</diffuse>
+          <emissive>0.95 0.14 0.005 1</emissive>
+        </material>
+      </visual>
+      <visual name="flame_yellow_core">
+        <pose>0 0 0.306 0 0 0</pose>
+        <geometry>
+          <cone>
+            <radius>0.171</radius>
+            <length>0.612</length>
+          </cone>
+        </geometry>
+        <material>
+          <ambient>1.0 0.68 0.025 1</ambient>
+          <diffuse>1.0 0.82 0.04 1</diffuse>
+          <emissive>1.0 0.55 0.01 1</emissive>
+        </material>
+      </visual>
+      <visual name="flame_hot_base">
+        <pose>0 0 0.144 0 0 0</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.225 0.198 0.18</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>1.0 0.48 0.015 1</ambient>
+          <diffuse>1.0 0.62 0.02 1</diffuse>
+          <emissive>1.0 0.4 0.005 1</emissive>
+        </material>
+      </visual>
+      <visual name="smoke_puff_1">
+        <pose>-0.036 0.009 1.08 0.04 0.02 0.1</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.261 0.243 0.306</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>0.19 0.20 0.21 0.78</ambient>
+          <diffuse>0.24 0.25 0.26 0.78</diffuse>
+        </material>
+        <transparency>0.22</transparency>
+      </visual>
+      <visual name="smoke_puff_2">
+        <pose>0.099 0.027 1.557 -0.02 0.03 -0.12</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.351 0.306 0.36</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>0.18 0.19 0.20 0.72</ambient>
+          <diffuse>0.23 0.24 0.25 0.72</diffuse>
+        </material>
+        <transparency>0.28</transparency>
+      </visual>
+      <visual name="smoke_puff_3">
+        <pose>-0.117 0 2.079 0.02 -0.02 0.14</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.432 0.378 0.387</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>0.17 0.18 0.19 0.66</ambient>
+          <diffuse>0.22 0.23 0.24 0.66</diffuse>
+        </material>
+        <transparency>0.34</transparency>
+      </visual>
+      <visual name="smoke_puff_4">
+        <pose>0.108 0.0135 2.619 -0.02 0.03 -0.08</pose>
+        <geometry>
+          <ellipsoid>
+            <radii>0.495 0.432 0.414</radii>
+          </ellipsoid>
+        </geometry>
+        <material>
+          <ambient>0.16 0.17 0.18 0.60</ambient>
+          <diffuse>0.21 0.22 0.23 0.60</diffuse>
+        </material>
+        <transparency>0.40</transparency>
+      </visual>
+    </link>
+  </model>
+</sdf>

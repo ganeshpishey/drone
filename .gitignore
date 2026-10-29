@@ -1,5 +1,6 @@
 # Python environments and caches
 .venv/
+.venv-*/
 .python/
 __pycache__/
 *.py[cod]
@@ -37,6 +38,8 @@ events.out.tfevents.*
 *.avi
 *.webm
 *.log
+integration/mavsdk_controller/telemetry.jsonl
+integration/mavsdk_controller/three_drone_telemetry.jsonl
 
 # Local Hydra and notebook state
 .hydra/

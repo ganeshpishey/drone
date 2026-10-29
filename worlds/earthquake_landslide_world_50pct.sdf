@@ -1,0 +1,5096 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <world name="earthquake_landslide_world">
+    <gravity>0 0 -9.81</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic" />
+    <physics name="harmonic_physics" type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.52 0.55 0.58 1</ambient>
+      <background>0.57 0.68 0.76 1</background>
+      <shadows>true</shadows>
+      <grid>false</grid>
+      <fog>
+        <type>linear</type>
+        <color>0.68 0.74 0.78 1</color>
+        <start>47.5</start>
+        <end>130</end>
+      </fog>
+    </scene>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>27.9881</latitude_deg>
+      <longitude_deg>86.9250</longitude_deg>
+      <elevation>1450</elevation>
+    </spherical_coordinates>
+    <light name="sun" type="directional">
+      <pose>0 0 100 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1.05</intensity>
+      <direction>-0.38 0.24 -0.89</direction>
+      <diffuse>0.92 0.90 0.82 1</diffuse>
+      <specular>0.25 0.25 0.25 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>1</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+    </light>
+    <model name="terrain">
+      <static>true</static>
+      <pose>-35 -28 0 0 0 0</pose>
+      <link name="landform">
+        <visual name="visual">
+          <geometry>
+            <heightmap>
+              <uri>model://earthquake_landslide_assets/meshes/terrain_combined.png</uri>
+              <size>90 75 50</size>
+              <pos>0 0 0</pos>
+              <texture>
+                <size>90</size>
+                <diffuse>model://earthquake_landslide_assets/materials/textures/terrain_albedo_combined.png</diffuse>
+                <normal>model://earthquake_landslide_assets/materials/textures/terrain_normal.png</normal>
+              </texture>
+              <sampling>1</sampling>
+            </heightmap>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <heightmap>
+              <uri>model://earthquake_landslide_assets/meshes/terrain_combined.png</uri>
+              <size>90 75 50</size>
+              <pos>0 0 0</pos>
+              <sampling>1</sampling>
+            </heightmap>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="launch_apron">
+      <static>true</static>
+      <pose>-70.00 -56.00 1.56 0 0 0.000</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>20 18 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.34 0.36 0.35 1</ambient>
+            <diffuse>0.34 0.36 0.35 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>20 18 0.12</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="launch_pad_1">
+      <static>true</static>
+      <pose>-75.00 -60.00 1.66 0 0 0.000</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.2 3.2 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.16 0.48 0.25 1</ambient>
+            <diffuse>0.16 0.48 0.25 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>3.2 3.2 0.08</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="launch_pad_2">
+      <static>true</static>
+      <pose>-67.00 -60.00 1.66 0 0 0.000</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.2 3.2 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.16 0.48 0.25 1</ambient>
+            <diffuse>0.16 0.48 0.25 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>3.2 3.2 0.08</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="launch_pad_3">
+      <static>true</static>
+      <pose>-75.00 -52.00 1.66 0 0 0.000</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.2 3.2 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.16 0.48 0.25 1</ambient>
+            <diffuse>0.16 0.48 0.25 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>3.2 3.2 0.08</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_0">
+      <static>true</static>
+      <pose>-53.57 3 12.48 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_0_-1">
+      <static>true</static>
+      <pose>-57.82 3 13.18 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_0_1">
+      <static>true</static>
+      <pose>-49.32 3 16.42 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_1">
+      <static>true</static>
+      <pose>-50.75 -3 4.74 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_1_-1">
+      <static>true</static>
+      <pose>-55 -3 6.23 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_1_1">
+      <static>true</static>
+      <pose>-46.5 -3 7.37 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_2">
+      <static>true</static>
+      <pose>-47.93 -9 0.44 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_2_-1">
+      <static>true</static>
+      <pose>-52.18 -9 0.95 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_2_1">
+      <static>true</static>
+      <pose>-43.68 -9 1.87 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_3">
+      <static>true</static>
+      <pose>-45.11 -15 0.44 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_3_-1">
+      <static>true</static>
+      <pose>-49.36 -15 0.95 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_3_1">
+      <static>true</static>
+      <pose>-40.86 -15 2.56 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_4">
+      <static>true</static>
+      <pose>-42.29 -21 0.53 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_4_-1">
+      <static>true</static>
+      <pose>-46.54 -21 0.95 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_4_1">
+      <static>true</static>
+      <pose>-38.04 -21 4.53 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_5">
+      <static>true</static>
+      <pose>-39.47 -27 0.44 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_5_-1">
+      <static>true</static>
+      <pose>-43.72 -27 1.49 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_5_1">
+      <static>true</static>
+      <pose>-35.22 -27 3.33 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_6">
+      <static>true</static>
+      <pose>-36.65 -33 0.44 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_6_-1">
+      <static>true</static>
+      <pose>-40.9 -33 0.95 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_6_1">
+      <static>true</static>
+      <pose>-32.4 -33 1.64 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_7">
+      <static>true</static>
+      <pose>-33.83 -39 0.44 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_7_-1">
+      <static>true</static>
+      <pose>-38.08 -39 0.95 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_7_1">
+      <static>true</static>
+      <pose>-29.58 -39 3.99 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_8">
+      <static>true</static>
+      <pose>-31.01 -45 1.86 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_8_-1">
+      <static>true</static>
+      <pose>-35.26 -45 1.8 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_8_1">
+      <static>true</static>
+      <pose>-26.76 -45 8.45 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_9">
+      <static>true</static>
+      <pose>-28.19 -51 4.56 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_9_-1">
+      <static>true</static>
+      <pose>-32.44 -51 4.25 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_9_1">
+      <static>true</static>
+      <pose>-23.94 -51 12.45 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_water_10">
+      <static>true</static>
+      <pose>-25.37 -57 10.43 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3.5 6.5 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.10 0.34 0.48 1</ambient>
+            <diffuse>0.10 0.34 0.48 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="river_bank_10_-1">
+      <static>true</static>
+      <pose>-29.62 -57 8.02 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="river_bank_10_1">
+      <static>true</static>
+      <pose>-21.12 -57 21.08 0 0 -0.43</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.40 0.38 0.32 1</ambient>
+            <diffuse>0.40 0.38 0.32 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 5 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_0">
+      <static>true</static>
+      <pose>-56 -45.5 4.81 0 0 0.55</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_1">
+      <static>true</static>
+      <pose>-52 -39.5 3.04 0 0 0.55</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_2">
+      <static>true</static>
+      <pose>-48 -33.5 1.16 0 0 0.55</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_3">
+      <static>true</static>
+      <pose>-44.5 -27 0.73 0 0 0.55</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_4">
+      <static>true</static>
+      <pose>-41 -20.5 1.71 0 0 0.55</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_5">
+      <static>true</static>
+      <pose>-37.5 -14 4.23 0 0 0.55</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_6">
+      <static>true</static>
+      <pose>-59 -24 4.59 0 0 -0.12</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_7">
+      <static>true</static>
+      <pose>-52 -24 2.38 0 0 -0.12</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="road_segment_8">
+      <static>true</static>
+      <pose>-45 -24 0.58 0 0 -0.12</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.20 0.22 0.23 1</ambient>
+            <diffuse>0.20 0.22 0.23 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>6.5 1.8 0.18</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="earthquake_apartment_0">
+      <static>true</static>
+      <pose>-61 -18 2.7 0 0 0</pose>
+      <link name="body">
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_steel">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_steel.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.160 0.190 0.200 1</ambient>
+            <diffuse>0.160 0.190 0.200 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_plaster">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_plaster.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.620 0.570 0.460 1</ambient>
+            <diffuse>0.620 0.570 0.460 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_roof">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_roof.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.190 0.140 1</ambient>
+            <diffuse>0.340 0.190 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.25 0 2.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.25 4.25 4.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>-0.25 0 7.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.75 4 3.5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="earthquake_house_1">
+      <static>true</static>
+      <pose>-56.5 -32 6.06 0 0 0.12</pose>
+      <link name="body">
+        <visual name="visual_plaster">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_plaster.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.620 0.570 0.460 1</ambient>
+            <diffuse>0.620 0.570 0.460 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_wood">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_wood.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.240 0.140 1</ambient>
+            <diffuse>0.340 0.240 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_roof">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_roof.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.190 0.140 1</ambient>
+            <diffuse>0.340 0.190 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>0 0 1.2 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.75 3.25 2.4</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>-0.2 0 3 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 2.75 1.5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="earthquake_apartment_2">
+      <static>true</static>
+      <pose>-51 -13 0.4 0 0 -0.2</pose>
+      <link name="body">
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_steel">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_steel.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.160 0.190 0.200 1</ambient>
+            <diffuse>0.160 0.190 0.200 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_plaster">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_plaster.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.620 0.570 0.460 1</ambient>
+            <diffuse>0.620 0.570 0.460 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_roof">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_roof.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.190 0.140 1</ambient>
+            <diffuse>0.340 0.190 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.25 0 2.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.25 4.25 4.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>-0.25 0 7.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.75 4 3.5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="earthquake_house_3">
+      <static>true</static>
+      <pose>-44 -41.5 0.4 0 0 0.3</pose>
+      <link name="body">
+        <visual name="visual_plaster">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_plaster.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.620 0.570 0.460 1</ambient>
+            <diffuse>0.620 0.570 0.460 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_wood">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_wood.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.240 0.140 1</ambient>
+            <diffuse>0.340 0.240 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_roof">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_roof.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.190 0.140 1</ambient>
+            <diffuse>0.340 0.190 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>0 0 1.2 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.75 3.25 2.4</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>-0.2 0 3 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 2.75 1.5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="earthquake_apartment_4">
+      <static>true</static>
+      <pose>-33 -14.5 6.35 0 0 -0.18</pose>
+      <link name="body">
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_steel">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_steel.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.160 0.190 0.200 1</ambient>
+            <diffuse>0.160 0.190 0.200 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_plaster">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_plaster.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.620 0.570 0.460 1</ambient>
+            <diffuse>0.620 0.570 0.460 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_roof">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/collapsed_apartment_roof.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.190 0.140 1</ambient>
+            <diffuse>0.340 0.190 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.25 0 2.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.25 4.25 4.2</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>-0.25 0 7.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.75 4 3.5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="earthquake_house_5">
+      <static>true</static>
+      <pose>-26 -37 8.01 0 0 0.1</pose>
+      <link name="body">
+        <visual name="visual_plaster">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_plaster.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.620 0.570 0.460 1</ambient>
+            <diffuse>0.620 0.570 0.460 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_wood">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_wood.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.240 0.140 1</ambient>
+            <diffuse>0.340 0.240 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_roof">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_roof.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.340 0.190 0.140 1</ambient>
+            <diffuse>0.340 0.190 0.140 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/buried_village_house_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>0 0 1.2 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.75 3.25 2.4</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>-0.2 0 3 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.5 2.75 1.5</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="earthquake_damaged_bridge">
+      <static>true</static>
+      <pose>-37 -28 1.96 0 0 0.43</pose>
+      <link name="body">
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/damaged_bridge_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_steel">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/damaged_bridge_steel.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.160 0.190 0.200 1</ambient>
+            <diffuse>0.160 0.190 0.200 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-4 0 4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>6.5 3.25 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>4 0 4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.5 3.25 1.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_2">
+          <pose>-3.5 0 1.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.65 0.65 5.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_3">
+          <pose>3.5 0 1.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.65 0.65 5.8</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_00">
+      <static>true</static>
+      <pose>-27.86 -12.115 7.76 0 0 -1.237</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.305 1.15 1.93</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.02</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_01">
+      <static>true</static>
+      <pose>-7.855 -20.605 24.4 0 0 2.058</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.605 1.41 2.37</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.25</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_02">
+      <static>true</static>
+      <pose>-19.965 -25.235 14.35 0 0 2.049</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.36 1.195 2.01</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.06</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_03">
+      <static>true</static>
+      <pose>-2.49 -8.36 32.12 0 0 -1.318</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.525 0.46 0.77</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.41</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_04">
+      <static>true</static>
+      <pose>-25.895 -15.565 9.93 0 0 2.142</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.625 1.43 2.4</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.265</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_05">
+      <static>true</static>
+      <pose>-8.415 -5.87 28.69 0 0 1.776</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.94 0.825 1.39</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.735</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_06">
+      <static>true</static>
+      <pose>-7.01 -34.745 24.86 0 0 -2.567</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.715 0.625 1.06</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.555</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_07">
+      <static>true</static>
+      <pose>-9.855 -5.615 25.58 0 0 2.453</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.17 1.03 1.73</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.91</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_08">
+      <static>true</static>
+      <pose>-20.02 -32.155 17.63 0 0 1.065</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.695 0.615 1.03</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.545</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_09">
+      <static>true</static>
+      <pose>-19.515 -6.84 7.9 0 0 1.877</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.5 1.32 2.22</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.17</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_10">
+      <static>true</static>
+      <pose>-13.145 -21.66 21.91 0 0 -0.642</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.58 0.51 0.86</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.45</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_11">
+      <static>true</static>
+      <pose>-2.695 -26.51 19.86 0 0 -2.507</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.015 0.895 1.5</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.79</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_12">
+      <static>true</static>
+      <pose>-11.535 -33.585 31.39 0 0 0.33</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.57 1.385 2.33</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.225</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_13">
+      <static>true</static>
+      <pose>-28.145 -26.81 7.87 0 0 -1.43</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.635 0.56 0.94</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.495</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_14">
+      <static>true</static>
+      <pose>-20.64 -13.725 10.3 0 0 2.037</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.825 0.725 1.22</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.64</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_15">
+      <static>true</static>
+      <pose>-23.93 -17.265 10.08 0 0 -2.271</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.06 0.93 1.57</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.825</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_16">
+      <static>true</static>
+      <pose>-15.585 -40.58 31.91 0 0 1.342</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.55 1.365 2.3</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.21</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_17">
+      <static>true</static>
+      <pose>-16.47 -45.61 30.13 0 0 1.917</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.5 0.44 0.74</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.39</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_18">
+      <static>true</static>
+      <pose>-17.03 -42.36 29.97 0 0 2.544</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.47 1.295 2.18</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.145</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_19">
+      <static>true</static>
+      <pose>-16.87 -20.745 16.14 0 0 -0.358</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.345 1.185 1.99</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.05</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_20">
+      <static>true</static>
+      <pose>-4.505 -21.32 20.64 0 0 2.181</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.945 0.83 1.4</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.735</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_21">
+      <static>true</static>
+      <pose>-27.94 -22.72 9.33 0 0 -0.615</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>0.705 0.62 1.05</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.55</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_boulder_23">
+      <static>true</static>
+      <pose>-18.12 -47.545 26.26 0 0 0.143</pose>
+      <link name="body">
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/irregular_boulder_stone.obj</uri>
+              <scale>1.09 0.96 1.62</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.85</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_rubble_0">
+      <static>true</static>
+      <pose>-59 -20.5 2.69 0 0 0</pose>
+      <link name="body">
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_stone.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.430 0.420 0.370 1</ambient>
+            <diffuse>0.430 0.420 0.370 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.5 0 0.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 3.5 1.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>1 0.5 1.5 0 0 0.2</pose>
+          <geometry>
+            <box>
+              <size>2 2 2.6</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_rubble_1">
+      <static>true</static>
+      <pose>-54 -34 4.85 0 0 0.31</pose>
+      <link name="body">
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_stone.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.430 0.420 0.370 1</ambient>
+            <diffuse>0.430 0.420 0.370 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.5 0 0.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 3.5 1.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>1 0.5 1.5 0 0 0.2</pose>
+          <geometry>
+            <box>
+              <size>2 2 2.6</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_rubble_2">
+      <static>true</static>
+      <pose>-46.5 -17 0.65 0 0 0.62</pose>
+      <link name="body">
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_stone.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.430 0.420 0.370 1</ambient>
+            <diffuse>0.430 0.420 0.370 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.5 0 0.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 3.5 1.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>1 0.5 1.5 0 0 0.2</pose>
+          <geometry>
+            <box>
+              <size>2 2 2.6</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_rubble_3">
+      <static>true</static>
+      <pose>-31 -42 1.87 0 0 0.93</pose>
+      <link name="body">
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_stone.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.430 0.420 0.370 1</ambient>
+            <diffuse>0.430 0.420 0.370 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.5 0 0.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 3.5 1.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>1 0.5 1.5 0 0 0.2</pose>
+          <geometry>
+            <box>
+              <size>2 2 2.6</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_rubble_4">
+      <static>true</static>
+      <pose>-20.5 -20.5 11.51 0 0 1.24</pose>
+      <link name="body">
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_stone.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.430 0.420 0.370 1</ambient>
+            <diffuse>0.430 0.420 0.370 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.5 0 0.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 3.5 1.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>1 0.5 1.5 0 0 0.2</pose>
+          <geometry>
+            <box>
+              <size>2 2 2.6</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_rubble_5">
+      <static>true</static>
+      <pose>-11 -30 27.22 0 0 1.55</pose>
+      <link name="body">
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_stone.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.430 0.420 0.370 1</ambient>
+            <diffuse>0.430 0.420 0.370 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.5 0 0.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 3.5 1.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>1 0.5 1.5 0 0 0.2</pose>
+          <geometry>
+            <box>
+              <size>2 2 2.6</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_rubble_6">
+      <static>true</static>
+      <pose>-17 -10.5 11.37 0 0 1.86</pose>
+      <link name="body">
+        <visual name="visual_dark_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_dark_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.320 0.340 0.340 1</ambient>
+            <diffuse>0.320 0.340 0.340 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_concrete">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_concrete.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.480 0.460 0.410 1</ambient>
+            <diffuse>0.480 0.460 0.410 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_stone">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_stone.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.430 0.420 0.370 1</ambient>
+            <diffuse>0.430 0.420 0.370 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <visual name="visual_brick">
+          <geometry>
+            <mesh>
+              <uri>model://earthquake_landslide_assets/meshes/rubble_cluster_brick.obj</uri>
+              <scale>0.5 0.5 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.490 0.250 0.170 1</ambient>
+            <diffuse>0.490 0.250 0.170 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision_0">
+          <pose>-0.5 0 0.8 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 3.5 1.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="collision_1">
+          <pose>1 0.5 1.5 0 0 0.2</pose>
+          <geometry>
+            <box>
+              <size>2 2 2.6</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="landslide_dust_0">
+      <static>true</static>
+      <pose>-6.02 -37 29.1 0 0 0</pose>
+      <link name="dust">
+        <visual name="dust_cloud">
+          <geometry>
+            <sphere>
+              <radius>1.75</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.62 0.55 0.46 1</ambient>
+            <diffuse>0.62 0.55 0.46 1</diffuse>
+          </material>
+          <transparency>0.52</transparency>
+        </visual>
+      </link>
+    </model>
+    <model name="landslide_dust_1">
+      <static>true</static>
+      <pose>-3.22 -27 23.82 0 0 0</pose>
+      <link name="dust">
+        <visual name="dust_cloud">
+          <geometry>
+            <sphere>
+              <radius>1.95</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.62 0.55 0.46 1</ambient>
+            <diffuse>0.62 0.55 0.46 1</diffuse>
+          </material>
+          <transparency>0.52</transparency>
+        </visual>
+      </link>
+    </model>
+    <model name="landslide_dust_2">
+      <static>true</static>
+      <pose>-0.42 -17 25.64 0 0 0</pose>
+      <link name="dust">
+        <visual name="dust_cloud">
+          <geometry>
+            <sphere>
+              <radius>2.15</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.62 0.55 0.46 1</ambient>
+            <diffuse>0.62 0.55 0.46 1</diffuse>
+          </material>
+          <transparency>0.52</transparency>
+        </visual>
+      </link>
+    </model>
+    <model name="earthquake_crevice_0">
+      <static>true</static>
+      <pose>-31 -19 7.71 0 0 0.8</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5 0.225 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.08 0.09 0.09 1</ambient>
+            <diffuse>0.08 0.09 0.09 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="earthquake_crevice_1">
+      <static>true</static>
+      <pose>-23.5 -25.5 9.54 0 0 0.7</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5 0.225 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.08 0.09 0.09 1</ambient>
+            <diffuse>0.08 0.09 0.09 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="earthquake_crevice_2">
+      <static>true</static>
+      <pose>-15 -37 30.64 0 0 0.9</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5 0.225 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.08 0.09 0.09 1</ambient>
+            <diffuse>0.08 0.09 0.09 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="earthquake_crevice_3">
+      <static>true</static>
+      <pose>-49 -27 2.29 0 0 1.3</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5 0.225 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.08 0.09 0.09 1</ambient>
+            <diffuse>0.08 0.09 0.09 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tree_01">
+      <static>true</static>
+      <pose>-72.34 -41.63 22.38 0 0 4.86</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.13 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.25</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.13 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.25</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.32 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.725</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.66</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_03">
+      <static>true</static>
+      <pose>-76.57 -6.255 31.79 0 0 0.46</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.71 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.42</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.71 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.42</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.23 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.92</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.84</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_04">
+      <static>true</static>
+      <pose>-0.975 -41.73 32.41 0 0 1.38</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.88 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.75</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.88 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.75</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.49 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.98</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.89</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_05">
+      <static>true</static>
+      <pose>-71.405 -9.625 24.47 0 0 5.74</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.6 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.20</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.6 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.20</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.06 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.885</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.805</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_06">
+      <static>true</static>
+      <pose>2.505 -21.185 26.6 0 0 4.54</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 3.33 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.66</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 3.33 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.66</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 5.19 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.13</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>1.03</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_07">
+      <static>true</static>
+      <pose>5.46 -58.855 45.11 0 0 5.58</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.44 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.88</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.44 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.88</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.81 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.83</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.755</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_08">
+      <static>true</static>
+      <pose>1.375 -34.84 33.19 0 0 5.17</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.71 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.42</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.71 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.42</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.23 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.92</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.84</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_09">
+      <static>true</static>
+      <pose>2.08 -48.77 34.5 0 0 3.29</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.53 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.06</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.53 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.06</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.95 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.86</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.785</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_10">
+      <static>true</static>
+      <pose>5.795 2.86 48 0 0 2.41</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 1.82 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>3.63</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 1.82 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>3.63</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 2.83 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.615</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.565</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_11">
+      <static>true</static>
+      <pose>0.52 -37.535 32.91 0 0 3.37</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 3.44 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.89</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 3.44 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.89</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 5.37 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.17</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>1.07</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_12">
+      <static>true</static>
+      <pose>1.355 -54.465 39.6 0 0 5.85</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 3.41 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.81</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 3.41 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.81</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 5.31 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.16</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>1.055</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_13">
+      <static>true</static>
+      <pose>3.06 -52.185 36.72 0 0 5.56</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.93 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.85</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.93 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.85</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.57 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.995</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.905</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_14">
+      <static>true</static>
+      <pose>-78.895 -46.14 21.85 0 0 0.87</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.22 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.44</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.22 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.44</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.47 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.755</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.69</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_15">
+      <static>true</static>
+      <pose>5.28 -7.655 34.08 0 0 3.05</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.47 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.95</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.47 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.95</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.86 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.84</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.765</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_17">
+      <static>true</static>
+      <pose>0 -56.04 42.01 0 0 5.91</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.74</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.7 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.805</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.735</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_18">
+      <static>true</static>
+      <pose>5.725 -9.095 33.87 0 0 1.01</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 3.41 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.82</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 3.41 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.82</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 5.32 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.16</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>1.06</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_19">
+      <static>true</static>
+      <pose>-75.69 -23.495 26.11 0 0 4.62</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.03 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.03 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.16 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.69</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.63</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_20">
+      <static>true</static>
+      <pose>-60.505 -39.77 6.34 0 0 1.48</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.52 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.52 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.94 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.86</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.78</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_21">
+      <static>true</static>
+      <pose>4.05 -13.6 29.03 0 0 0.35</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.42 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.84</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.42 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.84</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.78 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.825</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.75</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_22">
+      <static>true</static>
+      <pose>-70.675 -45.71 17.1 0 0 3.9</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 3.05 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.10</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 3.05 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.10</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.76 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.035</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.945</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_23">
+      <static>true</static>
+      <pose>-69.63 -35.815 19.46 0 0 3.83</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.01 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.03</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.01 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.03</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.14 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.685</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.625</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_25">
+      <static>true</static>
+      <pose>-21.215 -37.95 17.98 0 0 4.79</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.1 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.21</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.1 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.21</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.28 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.715</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.65</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_26">
+      <static>true</static>
+      <pose>-78.475 -37.475 24.36 0 0 3.31</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 1.87 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>3.75</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 1.87 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>3.75</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 2.92 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.635</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.58</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_27">
+      <static>true</static>
+      <pose>-10.205 0.965 26.89 0 0 1.96</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.31 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.61</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.31 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.61</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.6 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.785</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.715</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_28">
+      <static>true</static>
+      <pose>2.795 -43.44 33.97 0 0 3.81</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.68 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.35</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.68 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.35</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.17 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.91</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.83</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_29">
+      <static>true</static>
+      <pose>-76.22 -14.995 29.28 0 0 0.72</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.56 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.11</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.56 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.11</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.99 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.87</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.795</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_30">
+      <static>true</static>
+      <pose>-78.115 -6.065 30.47 0 0 0.4</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.85 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.69</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.85 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.69</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.44 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.965</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.88</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_31">
+      <static>true</static>
+      <pose>-68.8 -25.975 16.6 0 0 4.2</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.78 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.55</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.78 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.55</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.33 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.945</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.86</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_32">
+      <static>true</static>
+      <pose>-13.02 -4.595 16.78 0 0 1.7</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.58 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.16</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.58 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.16</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.02 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.875</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.8</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_33">
+      <static>true</static>
+      <pose>-76.575 -6.985 31.6 0 0 1.89</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 3.48 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.96</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 3.48 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.96</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 5.43 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.185</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>1.08</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_35">
+      <static>true</static>
+      <pose>8.275 -51.275 35.83 0 0 1.39</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 3.21 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.42</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 3.21 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.42</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 5 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.09</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.995</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_36">
+      <static>true</static>
+      <pose>3.38 -55.635 40.92 0 0 2.62</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.03 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.06</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.03 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>4.06</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 3.17 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.69</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.20 0.42 0.22 1</ambient>
+            <diffuse>0.20 0.42 0.22 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.63</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_37">
+      <static>true</static>
+      <pose>-74.04 -12.66 28.87 0 0 3.82</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.87 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.73</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.87 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.73</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.47 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.975</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.27 0.43 0.20 1</ambient>
+            <diffuse>0.27 0.43 0.20 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.89</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_38">
+      <static>true</static>
+      <pose>-75.705 -15.2 29.17 0 0 5.2</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.97 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.94</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.97 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.94</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.63 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.01</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.92</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_39">
+      <static>true</static>
+      <pose>4.67 -6.315 34.53 0 0 4.07</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.86 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.73</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.86 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.73</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.47 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.975</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.89</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_40">
+      <static>true</static>
+      <pose>-77.385 -16.415 27.95 0 0 2.64</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 3.44 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.88</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 3.44 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>6.88</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 5.37 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>1.17</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>1.065</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="tree_41">
+      <static>true</static>
+      <pose>7.54 -40.27 35.23 0 0 4.84</pose>
+      <link name="trunk">
+        <visual name="trunk_visual">
+          <pose>0 0 2.65 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.30</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.29 0.20 0.12 1</ambient>
+            <diffuse>0.29 0.20 0.12 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="trunk_collision">
+          <pose>0 0 2.65 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.11</radius>
+              <length>5.30</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="canopy">
+        <pose>0 0 4.14 0 0 0</pose>
+        <visual name="canopy_visual">
+          <geometry>
+            <sphere>
+              <radius>0.9</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.14 0.34 0.18 1</ambient>
+            <diffuse>0.14 0.34 0.18 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="canopy_collision">
+          <geometry>
+            <sphere>
+              <radius>0.82</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="incident_victim_0">
+      <static>true</static>
+      <pose>-58 -23 3.86086 0 0 0</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.175</radius>
+              <length>.8</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.05 0.32 0.88 1</ambient>
+            <diffuse>0.05 0.32 0.88 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.175</radius>
+              <length>.8</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="incident_victim_1">
+      <static>true</static>
+      <pose>-49 -16 0.85 0 0 0</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.175</radius>
+              <length>.8</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.05 0.32 0.88 1</ambient>
+            <diffuse>0.05 0.32 0.88 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.175</radius>
+              <length>.8</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="incident_victim_2">
+      <static>true</static>
+      <pose>-27 -40.5 7.66337 0 0 0</pose>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.175</radius>
+              <length>.8</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.05 0.32 0.88 1</ambient>
+            <diffuse>0.05 0.32 0.88 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.175</radius>
+              <length>.8</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="incident_fire_3">
+      <static>true</static>
+      <pose>-18.5 -21.5 13.7221 0 0 0</pose>
+      <link name="marker">
+        <visual name="flame_visual">
+          <geometry>
+            <cone>
+              <radius>0.55</radius>
+              <length>2.8</length>
+            </cone>
+          </geometry>
+          <material>
+            <ambient>1.0 0.24 0.025 1</ambient>
+            <diffuse>1.0 0.24 0.025 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="incident_smoke_3">
+      <static>true</static>
+      <pose>-17.9 -21.5 16.9221 0 0 0</pose>
+      <link name="plume">
+        <visual name="smoke_visual">
+          <geometry>
+            <sphere>
+              <radius>0.75</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.29 0.30 0.30 0.62</ambient>
+            <diffuse>0.29 0.30 0.30 0.62</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="incident_fire_4">
+      <static>true</static>
+      <pose>-12.5 -34 30.6011 0 0 0</pose>
+      <link name="marker">
+        <visual name="flame_visual">
+          <geometry>
+            <cone>
+              <radius>0.55</radius>
+              <length>2.8</length>
+            </cone>
+          </geometry>
+          <material>
+            <ambient>1.0 0.24 0.025 1</ambient>
+            <diffuse>1.0 0.24 0.025 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="incident_smoke_4">
+      <static>true</static>
+      <pose>-11.9 -34 33.8011 0 0 0</pose>
+      <link name="plume">
+        <visual name="smoke_visual">
+          <geometry>
+            <sphere>
+              <radius>0.75</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.29 0.30 0.30 0.62</ambient>
+            <diffuse>0.29 0.30 0.30 0.62</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="incident_fire_5">
+      <static>true</static>
+      <pose>-37.5 -10.5 4.29279 0 0 0</pose>
+      <link name="marker">
+        <visual name="flame_visual">
+          <geometry>
+            <cone>
+              <radius>0.55</radius>
+              <length>2.8</length>
+            </cone>
+          </geometry>
+          <material>
+            <ambient>1.0 0.24 0.025 1</ambient>
+            <diffuse>1.0 0.24 0.025 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="incident_smoke_5">
+      <static>true</static>
+      <pose>-36.9 -10.5 7.49279 0 0 0</pose>
+      <link name="plume">
+        <visual name="smoke_visual">
+          <geometry>
+            <sphere>
+              <radius>0.75</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.29 0.30 0.30 0.62</ambient>
+            <diffuse>0.29 0.30 0.30 0.62</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

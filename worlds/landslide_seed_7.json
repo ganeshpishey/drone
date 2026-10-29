@@ -1,0 +1,9 @@
+{
+  "world": "landslide_seed_7.sdf",
+  "mode": "landslide",
+  "seed": 7,
+  "terrain": "terrain_landslide.png",
+  "texture": "terrain_albedo_landslide.png",
+  "incident_markers": "deterministically jittered +/- 4 m",
+  "drones": "externally spawned at launch pads"
+}

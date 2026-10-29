@@ -1,0 +1,53 @@
+# Compact Day 5 rescue layout. Coordinates use world ENU metres.
+world: earthquake_world
+coordinate_frame: ENU
+origin: rescue_staging_area
+mission_boundary_m: [-33, 33, -33, 33]
+
+staging_area:
+  position_m: [-27.5, -27.5, 0]
+  size_m: [14, 14]
+  drone_pads:
+    - {id: scout, position_m: [-31, -31, 0]}
+    - {id: ambulance, position_m: [-25, -31, 0]}
+    - {id: fireman, position_m: [-31, -25, 0]}
+
+victims:
+  - {id: victim_0, position_m: [-16.5, 6.5, 0], marker_model: victim_marker_0}
+  - {id: victim_1, position_m: [17.5, 6, 0], marker_model: victim_marker_1}
+  - {id: victim_2, position_m: [-16.5, -16, 0], marker_model: victim_marker_2}
+  - {id: victim_3, position_m: [17.5, -16, 0], marker_model: victim_marker_3}
+  - {id: victim_4, position_m: [1, -17.5, 0], marker_model: victim_marker_4}
+  - {id: victim_5, position_m: [1.5, 14.5, 0], marker_model: victim_marker_5}
+
+fires:
+  - {id: fire_0, position_m: [-22, 5.5, 0], marker_model: fire_visual_0}
+  - {id: fire_1, position_m: [23, 4, 0], marker_model: fire_visual_1}
+  - {id: fire_2, position_m: [-21.5, -15.5, 0], marker_model: fire_visual_2}
+  - {id: fire_3, position_m: [22.5, -15.5, 0], marker_model: fire_visual_3}
+
+canal:
+  centerline_y_m: 17.5
+  width_m: 5
+  bridge_model_prefix: bridge_
+
+inspection_zones:
+  - {id: zone_0, position_m: [-15.5, 7, 0]}
+  - {id: zone_1, position_m: [16.5, 7, 0]}
+  - {id: zone_2, position_m: [-15.5, -15.5, 0]}
+  - {id: zone_3, position_m: [16, -15.5, 0]}
+  - {id: zone_4, position_m: [1.5, -17, 0]}
+  - {id: zone_5, position_m: [1, 14.5, 0]}
+
+buildings:
+  - {id: residential_west, center_m: [-19, 1, 3.5], footprint_m: [7, 6]}
+  - {id: residential_northeast, center_m: [19, 1.5, 3.5], footprint_m: [7, 6]}
+  - {id: residential_southeast, center_m: [19, -19.5, 3.5], footprint_m: [7, 6]}
+  - {id: warehouse, center_m: [0, -21.5, 2.2], footprint_m: [10, 5]}
+
+vehicles:
+  - {id: abandoned_car_0, position_m: [-5, 10.2, 0]}
+  - {id: abandoned_car_1, position_m: [11, -10.5, 0]}
+  - {id: abandoned_van_0, position_m: [-10, -9.5, 0]}
+
+service_approach_radius_m: 3

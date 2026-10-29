@@ -26,6 +26,10 @@ viewer = [
   "imageio-ffmpeg>=0.5,<1",
   "PySide6>=6.8,<7",
 ]
+px4 = [
+  # MAVSDK-Python's established asyncio client API (the v3 gRPC package).
+  "mavsdk-grpc>=3.17,<4",
+]
 dev = [
   "hypothesis>=6.0,<7",
   "mypy>=1.13,<2",
